@@ -9,8 +9,8 @@ getwd()
 setwd("~/my_first_remote_directory/stephanie_mudge_strategy/raw_data/chronicling_america_sample/")
 pdf <- "./0380.pdf"
 pdf2 <- "./0034.pdf"
-text_data2 <- pdf_text(pdf2)
-cat(text_data2)
+text_data <- pdf_text(pdf)
+cat(text_data)
 
 ocr_output2 <- ocr(pdf2, engine = "eng")
 head(ocr_output2)
@@ -44,6 +44,16 @@ stopwords(ocr_output2_c)
 ##### 4) almost no actual words (when I clean it and add up words, many of which 
 #####    aren't even coherent, it's only 3782)
 ##### 5) when I ran stopwords(ocr_output2_c), I got return "no stopwords available"
+
+
+
+library(xml2)
+doc_ocr <- "https://chroniclingamerica.loc.gov/lccn/sn86076241/1916-06-16/ed-1/seq-1/ocr/"
+ocr_html <- read_html(doc_ocr)
+ocr_text <- xml_text(xml_find_all(ocr_html, "//body/div[3]//p"))
+ocr_text
+
+
 
 
 
